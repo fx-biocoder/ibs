@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% if page.title %}
+            {{ page.title }} - {{ site.title }}
+        {% else %}
+            {{ site.title }}
+        {% endif %}
+    </title>
+    
+    <!-- Enlace al CSS (usando baseurl) -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
+    
+    <!-- Metaetiquetas para SEO y redes sociales -->
+    <meta name="description" content="{{ site.description }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+</head>
+<body>
+    <!-- Cabecera del sitio -->
+    <header>
+        <div class="container">
+            <h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
+            <p>{{ site.description }}</p>
+            <nav>
+                <a href="{{ site.baseurl }}/">Inicio</a>
+                <a href="{{ site.baseurl }}/blog/">Blog</a>
+                <a href="https://github.com/stndcx/ibs">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="container">
+            {{ content }}
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ "now" | date: "%Y" }} - {{ site.title }}</p>
+            <p>Proyecto de código abierto bajo licencia MIT</p>
+        </div>
+    </footer>
+</body>
+</html>
