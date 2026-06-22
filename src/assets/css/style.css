@@ -1,0 +1,149 @@
+/* src/assets/css/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #1a1a2e;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Cabecera */
+header {
+    background: linear-gradient(135deg, #2d6a4f, #1b4332);
+    color: white;
+    padding: 30px 0;
+    margin-bottom: 30px;
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav {
+    margin-top: 15px;
+}
+
+header nav a {
+    color: #d8f3dc;
+    text-decoration: none;
+    margin-right: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+header nav a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Contenido principal */
+main {
+    min-height: 60vh;
+    background: white;
+    padding: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Pie de página */
+footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    text-align: center;
+    color: #6c757d;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Estilos para posts y contenido */
+.post-title {
+    color: #1b4332;
+    margin-bottom: 10px;
+}
+
+.post-meta {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.post-content {
+    font-size: 1.1rem;
+}
+
+.post-content h2 {
+    color: #2d6a4f;
+    margin: 25px 0 15px;
+}
+
+.post-content h3 {
+    color: #40916c;
+    margin: 20px 0 10px;
+}
+
+.post-content ul, .post-content ol {
+    margin: 15px 0 15px 25px;
+}
+
+.post-content code {
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Tarjetas para secciones */
+.card {
+    background: #f8f9fa;
+    border-left: 5px solid #2d6a4f;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    background: #2d6a4f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #1b4332;
+}
+
+/* Blog list */
+.post-list {
+    list-style: none;
+    padding: 0;
+}
+
+.post-list li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.post-list .post-link {
+    font-size: 1.2rem;
+    color: #1b4332;
+    text-decoration: none;
+}
+
+.post-list .post-link:hover {
+    text-decoration: underline;
+}
