@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 Guía de Contribución
+    url: https://github.com/stndcx/ibs/blob/main/CONTRIBUTING.md
+    about: Por favor, lee nuestra guía antes de abrir un issue.
+  - name: Preguntas Generales
+    url: https://github.com/stndcx/ibs/discussions
+    about: Si tienes preguntas, usa "Discussions".

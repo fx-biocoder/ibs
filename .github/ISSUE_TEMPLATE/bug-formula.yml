@@ -1,0 +1,51 @@
+name: "Reporte de error en Cálculo/ML"
+description: "Reporta un problema con el cálculo del IBS o el modelo predictivo."
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees:
+  - stndcx
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar este problema. Por favor, completa la siguiente información para ayudarnos a solucionarlo.
+  - type: input
+    id: version
+    attributes:
+      label: Versión del IBS
+      description: ¿Qué versión de la herramienta estás usando?
+      placeholder: "ej. v0.0.1-beta"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: ¿Qué pasó?
+      description: Describe el error que observaste y cuál era el resultado esperado.
+      placeholder: "El cálculo del IBS para suelo arcilloso da un valor de 85, pero debería ser alrededor de 60."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      description: Proporciona los pasos exactos para reproducir el error.
+      placeholder: |
+        1. Ejecutar `python calcular_ibs.py` con los parámetros...
+        2. El script devuelve el error...
+    validations:
+      required: true
+  - type: textarea
+    id: input-data
+    attributes:
+      label: Datos de entrada
+      description: Si es posible, pega los datos de entrada (humedad, pH, etc.) que generaron el error.
+      render: python
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Código de Conducta
+      description: Al enviar este issue, aceptas seguir nuestro [Código de Conducta](https://example.com).
+      options:
+        - label: Estoy de acuerdo en seguir el Código de Conducta del proyecto.
+          required: true
