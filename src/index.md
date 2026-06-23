@@ -1,55 +1,238 @@
----
-layout: default
-title: IBS - Índice de Bioactividad del Suelo
----
+<!-- HERO -->
+<section class="hero">
+  <div class="hero_eyebrow">Proyecto abierto · Agtech · Argentina</div>
+  <h1 class="hero_titulo">
+    El suelo tiene un <span>número.</span><br>
+    Ahora podés medirlo.
+  </h1>
+  <p class="hero_bajada">
+    IBS es un índice científico de bioactividad del suelo: integra respiración microbiana,
+    materia orgánica, pH y temperatura en un único valor accionable (0–100),
+    con recomendaciones de manejo automáticas.
+  </p>
+  <div class="hero_acciones">
+    <a href="#demo" class="btn_primario">Probar el índice</a>
+    <a href="https://github.com/stndcx/ibs" target="_blank" class="btn_secundario"><i class="bi bi-github"></i> Ver en GitHub</a>
+  </div>
+</section>
 
-# 🌱 Índice de Bioactividad del Suelo (IBS)
+<!-- DEMO INTERACTIVA -->
+<section class="indice_demo" id="demo">
+  <div class="indice_estado" id="demo_estado">MODERADO</div>
+  <div class="indice_numero" id="demo_numero">63.4</div>
+  <div class="indice_barra_wrap">
+    <div class="indice_barra_fill" id="demo_barra"></div>
+  </div>
+  <p class="indice_desc" id="demo_desc">
+    Aplicar bioestimulante microbiano liviano. Remonitorear en 90 días.
+  </p>
 
-**Marco abierto para la evaluación rápida de la actividad microbiana y la toma de decisiones agronómicas**
+  <div class="demo_sliders">
+    <div class="slider_item">
+      <label class="slider_label">
+        CO₂
+        <span class="slider_valor" id="val_co2">280</span>
+      </label>
+      <input type="range" id="sl_co2" min="30" max="600" value="280">
+    </div>
+    <div class="slider_item">
+      <label class="slider_label">
+        MO %
+        <span class="slider_valor" id="val_mo">2.4</span>
+      </label>
+      <input type="range" id="sl_mo" min="0.3" max="6" step="0.1" value="2.4">
+    </div>
+    <div class="slider_item">
+      <label class="slider_label">
+        pH
+        <span class="slider_valor" id="val_ph">6.5</span>
+      </label>
+      <input type="range" id="sl_ph" min="4.5" max="9" step="0.1" value="6.5">
+    </div>
+    <div class="slider_item">
+      <label class="slider_label">
+        Tem. °C
+        <span class="slider_valor" id="val_temp">21</span>
+      </label>
+      <input type="range" id="sl_temp" min="5" max="40" step="0.5" value="21">
+    </div>
+  </div>
+</section>
 
-<div class="card">
-## 📊 Estado del Proyecto
+<!-- FÓRMULA -->
+<section id="formula">
+  <div class="formula_section">
+    <h2 class="seccion_titulo">La fórmula</h2>
+    <p class="seccion_sub">
+      Abierta, documentada y ajustable por zona climática.
+      Los pesos reflejan la importancia relativa de cada parámetro en la actividad biológica del suelo.
+    </p>
 
-- **Versión:** v0.0.1-beta
-- **Última actualización:** Junio 2026
-- **Licencia:** MIT
-- **Tecnologías:** 
-  - Python 38.7%
-  - HTML 33.2%
-  - PHP 18.7%
-  - Ruby 9.4%
+    <div class="formula_bloque">
+<span class="comentario"># Índice de Bioactividad del Suelo</span><br>
+IBS = (<span class="clave">CO2_norm</span>  × 0.40) +
+      (<span class="clave">MO_norm</span>   × 0.30) +
+      (<span class="clave">pH_score</span>  × 0.20) +
+      (<span class="clave">Temp_score</span> × 0.10)
+<br><br>
+<span class="comentario"># Normalización lineal (CO₂ y MO)</span><br>
+valor_norm = (medicion - rango_min) / (rango_max - rango_min)
+<br><br>
+<span class="comentario"># Curva gaussiana (pH y Temperatura)</span><br>
+ph_score   = exp(-0.5 × ((ph   - 6.5) / 1.2)²)<br>
+temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
+    </div>
 
-<a href="https://github.com/stndcx/ibs" class="btn">📂 Ver código en GitHub</a>
-</div>
+    <div class="params_grid">
+      <div class="param_card">
+        <div class="param_nombre">CO₂ — Respiración basal</div>
+        <div class="param_peso">40%</div>
+        <div class="param_detalle">mg CO₂ / kg suelo / día. Indicador directo de actividad microbiana. Rango: 30–600.</div>
+      </div>
+      <div class="param_card">
+        <div class="param_nombre">Materia Orgánica</div>
+        <div class="param_peso">30%</div>
+        <div class="param_detalle">Porcentaje en muestra seca. Sustrato energético de los microorganismos. Rango: 0.3–6.0%.</div>
+      </div>
+      <div class="param_card">
+        <div class="param_nombre">pH del suelo</div>
+        <div class="param_peso">20%</div>
+        <div class="param_detalle">Regula disponibilidad de nutrientes y comunidades microbianas. Óptimo biológico: 6.0–7.0.</div>
+      </div>
+      <div class="param_card">
+        <div class="param_nombre">Temperatura</div>
+        <div class="param_peso">10%</div>
+        <div class="param_detalle">Factor corrector de cinética biológica. °C a 10 cm de profundidad. Óptimo: 15–28°C.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-## 🚀 ¿Qué es el IBS?
+<!-- ESTADOS -->
+<section class="estados_section" id="estados">
+  <div class="estados_inner">
+    <h2 class="seccion_titulo">Tabla de decisión</h2>
+    <p class="seccion_sub">El IBS no solo mide — recomienda. Cada rango activa un protocolo de manejo específico.</p>
 
-El **Índice de Bioactividad del Suelo (IBS)** es una herramienta de código abierto diseñada para:
+    <div class="estados_lista">
+      <div class="estado_card" style="--color:#EF4444">
+        <div class="estado_rango">0 – 30</div>
+        <div class="estado_nombre">Crítico</div>
+        <div class="estado_accion">Enmienda orgánica urgente. Suspender labranza 90 días. Remonitorear en 45 días.</div>
+      </div>
+      <div class="estado_card" style="--color:#F97316">
+        <div class="estado_rango">31 – 50</div>
+        <div class="estado_nombre">Bajo</div>
+        <div class="estado_accion">Incorporar compost. Rotación de cultivos. Reducir herbicidas de contacto.</div>
+      </div>
+      <div class="estado_card" style="--color:#CA8A04">
+        <div class="estado_rango">51 – 70</div>
+        <div class="estado_nombre">Moderado</div>
+        <div class="estado_accion">Bioestimulante microbiano liviano. Mantener cobertura. Monitorear pH.</div>
+      </div>
+      <div class="estado_card" style="--color:#16A34A">
+        <div class="estado_rango">71 – 85</div>
+        <div class="estado_nombre">Bueno</div>
+        <div class="estado_accion">Mantener manejo actual. Registrar prácticas. Muestra anual.</div>
+      </div>
+      <div class="estado_card" style="--color:#2563EB">
+        <div class="estado_rango">86 – 100</div>
+        <div class="estado_nombre">Excelente</div>
+        <div class="estado_accion">No intervenir. Documentar como caso de referencia.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-- Evaluar rápidamente la actividad microbiana del suelo
-- Ayudar en la toma de decisiones agronómicas
-- Proporcionar un marco estandarizado para el análisis
+<!-- MODELO ML -->
+<section id="modelo">
+  <div class="ml_section">
+    <div>
+      <h2 class="seccion_titulo">Modelo ML</h2>
+      <p class="seccion_sub" style="margin-bottom:1.5rem">
+        Un Random Forest Regressor entrenado sobre dataset sintético de 3.000 registros
+        con ruido gaussiano aprende los patrones no lineales que la fórmula ponderada no captura.
+        Mejora con datos reales de campo a medida que se incorporan.
+      </p>
+      <p style="font-size:0.85rem;color:var(--grafito);line-height:1.7">
+        El modelo y el dataset son públicos. La fórmula base actúa como fallback
+        si el microservicio no está disponible. Los pesos son ajustables por zona climática.
+      </p>
+    </div>
+    <div class="ml_metricas">
+      <div class="metrica_item">
+        <span class="metrica_nombre">Algoritmo</span>
+        <span class="metrica_valor">Random Forest</span>
+      </div>
+      <div class="metrica_item">
+        <span class="metrica_nombre">Estimadores</span>
+        <span class="metrica_valor">200</span>
+      </div>
+      <div class="metrica_item">
+        <span class="metrica_nombre">Dataset</span>
+        <span class="metrica_valor">3.000 registros</span>
+      </div>
+      <div class="metrica_item">
+        <span class="metrica_nombre">MAE esperado</span>
+        <span class="metrica_valor">&lt; 3.5 pts</span>
+      </div>
+      <div class="metrica_item">
+        <span class="metrica_nombre">R²</span>
+        <span class="metrica_valor">&gt; 0.97</span>
+      </div>
+      <div class="metrica_item">
+        <span class="metrica_nombre">Microservicio</span>
+        <span class="metrica_valor">Flask / Python</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-Este proyecto está en desarrollo activo y busca ser un recurso útil para la comunidad agrícola y científica.
-</div>
+<!-- INTEGRACIONES / NEGOCIO -->
+<section class="negocio_section" id="integraciones">
+  <div class="negocio_inner">
+    <h2 class="seccion_titulo">Cómo trabajar con IBS</h2>
+    <p class="seccion_sub">
+      El índice es abierto. Los informes profesionales y las integraciones son el producto.
+    </p>
+    <div class="canales_grid">
+      <div class="canal_card">
+        <div class="canal_icono"><i class="bi bi-file-earmark-pdf" style="color: #F5F0E8; font-size: 2rem;"></i></div>
+        <div class="canal_nombre">Informes por demanda</div>
+        <div class="canal_desc">
+          Ingresás los parámetros de tu muestra y recibís un informe PDF profesional
+          con el índice, la interpretación y el plan de acción firmado.
+        </div>
+      </div>
+      <div class="canal_card">
+        <div class="canal_icono"><i class="bi bi-buildings" style="color: #F5F0E8; font-size: 2rem;"></i></div>
+        <div class="canal_nombre">Integración B2B</div>
+        <div class="canal_desc">
+          Si tenés una plataforma agro, podés integrar el motor IBS vía API.
+          Tus clientes generan informes desde tu sistema, vos mantenés la marca.
+        </div>
+      </div>
+      <div class="canal_card">
+        <div class="canal_icono"><i class="bi bi-git" style="color: #F5F0E8; font-size: 2rem;"></i></div>
+        <div class="canal_nombre">Contribución abierta</div>
+        <div class="canal_desc">
+          Datos reales de campo, revisión de pesos por zona, nuevos parámetros.
+          El índice mejora con cada contribución validada científicamente.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-## 📝 Últimas Publicaciones
-
-{% for post in site.posts limit:3 %}
-- [{{ post.title }}]({{ post.url | relative_url }}) - {{ post.date | date: "%d/%m/%Y" }}
-{% endfor %}
-
-{% if site.posts.size == 0 %}
-*No hay publicaciones aún. ¡Sé el primero en escribir un post!*
-{% endif %}
-</div>
-
-## 🔧 ¿Cómo contribuir?
-
-1. Haz un fork del repositorio
-2. Crea una rama para tu contribución
-3. Envía un pull request
-
-¡Toda ayuda es bienvenida!
+<!-- CTA FINAL -->
+<section class="cta_section">
+  <h2 class="seccion_titulo">¿Querés integrar o colaborar?</h2>
+  <p class="seccion_sub">
+    Buscamos empresas agro, laboratorios y agrónomos que quieran usar o mejorar el índice.
+    El código es abierto. La conversación también.
+  </p>
+  <div class="cta_acciones">
+    <a href="https://github.com/stndcx/ibs" target="_blank" class="btn_tierra"><i class="bi bi-github"></i> Ver el repositorio</a>
+    <a href="https://github.com/stndcx/ibs/issues" target="_blank" class="btn_borde">Abrir un issue</a>
+  </div>
+</section>
