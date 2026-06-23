@@ -1,3 +1,9 @@
+---
+layout: default
+title: IBS — Índice de Bioactividad del Suelo
+description: Índice científico de bioactividad del suelo que integra respiración microbiana, materia orgánica, pH y temperatura
+---
+
 <!-- HERO -->
 <section class="hero">
   <div class="hero_eyebrow">Proyecto abierto · Agtech · Argentina</div>
