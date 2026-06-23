@@ -1,0 +1,30 @@
+name: "✨ Solicitud de Mejora en Fórmula/ML"
+description: "Sugiere una mejora para el modelo predictivo, una nueva variable o una optimización del cálculo."
+title: "[Mejora]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por tu sugerencia. Tu idea es clave para mejorar el proyecto.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe tu idea de mejora
+      description: ¿Qué te gustaría añadir o cambiar?
+      placeholder: "Creo que deberíamos incluir la temperatura del suelo como variable en el cálculo."
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivación y contexto
+      description: ¿Por qué esta mejora es importante? ¿Qué problema resuelve?
+      placeholder: "La temperatura afecta significativamente la actividad microbiana en climas fríos, mejorando la precisión del índice."
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: ¿Has pensado en otras formas de abordar este problema?
