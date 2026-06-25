@@ -21,3 +21,8 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+
+collections:
+  events:
+    output: false
+    sort_by: date
