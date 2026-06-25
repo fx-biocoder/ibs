@@ -42,6 +42,7 @@ nav {
   height: 56px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+
 .nav_logo {
   font-family: var(--f-mono);
   font-weight: 600;
@@ -50,6 +51,7 @@ nav {
   letter-spacing: 0.12em;
   text-decoration: none;
 }
+
 .nav_links { display: flex; gap: 2rem; list-style: none; }
 .nav_links a {
   color: rgba(255,255,255,0.65);
@@ -59,7 +61,39 @@ nav {
   letter-spacing: 0.03em;
   transition: color 0.2s;
 }
+
 .nav_links a:hover { color: var(--blanco); }
+
+.sec { padding: 5rem 0; border-top: 1px solid rgba(0,0,0,0.07); }
+.sec__contenedor { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+.sec__eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #16A34A;
+  margin: 0 0 0.75rem;
+}
+ 
+.sec__titulo {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+ 
+.sec__desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #4B5563;
+  max-width: 560px;
+  margin: 0 0 2.5rem;
+}
+ 
+.sec__nota { font-size: 13px; color: #6B7280; margin-top: 1.5rem; }
+.sec__nota a { color: #2563EB; }
 
 .hero {
   background: var(--tierra);
@@ -428,6 +462,85 @@ input[type="range"] {
   transition: all 0.2s;
 }
 .btn_borde:hover { background: var(--tierra); color: var(--blanco); }
+
+/* ---- AGENDA ---- */
+
+.agenda {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
+.agenda__item {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 12px;
+}
+ 
+.agenda__fecha {
+  flex-shrink: 0;
+  width: 44px;
+  text-align: center;
+  padding-top: 2px;
+}
+ 
+.agenda__dia {
+  display: block;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+ 
+.agenda__mes {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6B7280;
+}
+ 
+.agenda__titulo {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+ 
+.agenda__meta {
+  font-size: 13px;
+  color: #6B7280;
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+ 
+.agenda__tipo {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+ 
+.agenda__tipo--remoto { background: #E6F1FB; color: #0C447C; }
+.agenda__tipo--presencial { background: #EAF3DE; color: #27500A; }
+.agenda__tipo--asincronico { background: #FAEEDA; color: #633806; }
+ 
+.agenda__link {
+  font-size: 13px;
+  color: #2563EB;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+ 
+.agenda__link:hover { text-decoration: underline; }
 
 /* Blog list */
 

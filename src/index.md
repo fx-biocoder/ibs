@@ -230,6 +230,55 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
   </div>
 </section>
 
+<!-- ===== AGENDA ===== -->
+<section class="sec sec--agenda" id="agenda">
+  <div class="sec__contenedor">
+    <p class="sec__eyebrow">Agenda abierta</p>
+    <h2 class="sec__titulo">Próximas instancias</h2>
+    <p class="sec__desc">Reuniones, revisiones y sprints abiertos a la comunidad. Todos los eventos son de participación libre salvo indicación.</p>
+ 
+    <div class="agenda">
+      {% assign eventos = site.events | sort: 'date' %}
+      {% for event in eventos limit: 5 %}
+        {% assign dia = event.date | date: "%d" %}
+        {% assign mes = event.date | date: "%b" %}
+        
+        <div class="agenda__item">
+          <div class="agenda__fecha">
+            <span class="agenda__dia">{{ dia }}</span>
+            <span class="agenda__mes">{{ mes }}</span>
+          </div>
+          <div class="agenda__contenido">
+            <h3 class="agenda__titulo">{{ event.title }}</h3>
+            <p class="agenda__meta">
+              {{ event.time }}
+              <span class="agenda__tipo agenda__tipo--{{ event.type }}">
+                {% case event.type %}
+                  {% when 'remoto' %}Remoto
+                  {% when 'presencial' %}Presencial
+                  {% when 'asincronico' %}Asincrónico
+                {% endcase %}
+              </span>
+            </p>
+            <a href="{{ event.link }}" 
+               {% if event.link contains 'http' %}target="_blank"{% endif %} 
+               class="agenda__link">
+              <i class="{{ event.link_icon }}" aria-hidden="true"></i> {{ event.link_text }}
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <p class="agenda__vacio">No hay eventos programados. ¡Próximamente!</p>
+      {% endfor %}
+    </div>
+ 
+    <p class="sec__nota">
+      ¿Querés proponer un evento?
+      <a href="https://github.com/stndcx/ibs/issues" target="_blank">Abrí un issue en GitHub</a>
+    </p>
+  </div>
+</section>
+
 <!-- CTA FINAL -->
 <section class="cta_section">
   <h2 class="seccion_titulo">¿Querés integrar o colaborar?</h2>
