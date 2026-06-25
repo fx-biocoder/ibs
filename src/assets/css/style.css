@@ -534,6 +534,177 @@ input[type="range"] {
   font-size: 1.1rem;
 }
 
+.post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.post-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--pergamino, #EDE8DC);
+}
+
+.post-title {
+  font-family: var(--f-display, serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--tierra, #1C3A2A);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.post-header .post-meta {
+  color: var(--grafito, #4A5240);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  opacity: 0.85;
+}
+
+.post-header .post-meta time { font-weight: 500; }
+
+.post-header .post-meta i {
+  font-size: 0.9rem;
+  color: var(--musgo, #2D6A4F);
+}
+
+.post-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--carbon, #111810);
+}
+
+.post-content h2 {
+  font-family: var(--f-display, serif);
+  color: var(--tierra, #1C3A2A);
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  line-height: 1.3;
+}
+
+.post-content h3 {
+  font-family: var(--f-display, serif);
+  color: var(--musgo, #2D6A4F);
+  font-size: 1.4rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.post-content p { margin-bottom: 1.25rem; }
+
+.post-content ul,
+.post-content ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.post-content li { margin-bottom: 0.5rem; }
+
+.post-content a {
+  color: var(--musgo, #2D6A4F);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.post-content a:hover { color: var(--tierra, #1C3A2A); }
+
+.post-content blockquote {
+  border-left: 4px solid var(--brote, #52B788);
+  padding: 0.75rem 1.5rem;
+  margin: 1.5rem 0;
+  background: var(--pergamino, #EDE8DC);
+  border-radius: 0 var(--radio, 6px) var(--radio, 6px) 0;
+  font-style: italic;
+  color: var(--grafito, #4A5240);
+}
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radio, 6px);
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-content code {
+  font-family: var(--f-mono, monospace);
+  background: var(--pergamino, #EDE8DC);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--tierra, #1C3A2A);
+}
+
+.post-content pre {
+  background: var(--carbon, #111810);
+  color: var(--brote, #52B788);
+  padding: 1.5rem;
+  border-radius: var(--radio, 6px);
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.post-content pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--pergamino, #EDE8DC);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.post-footer .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.8rem;
+  background: var(--tierra, #1C3A2A);
+  color: var(--blanco, #FFFFFF);
+  text-decoration: none;
+  border-radius: var(--radio, 6px);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.post-footer .btn:hover {
+  background: var(--musgo, #2D6A4F);
+  transform: translateY(-1px);
+}
+
+.post-footer .btn i { font-size: 1.1rem; }
+
+.post-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.post-tags i { color: var(--grafito, #4A5240); font-size: 1rem; }
+
+.post-tags .tag {
+  background: var(--pergamino, #EDE8DC);
+  color: var(--grafito, #4A5240);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.post-tags .tag:hover { background: var(--tierra, #1C3A2A); color: var(--blanco, #FFFFFF); }
+
 footer {
   background: var(--tierra);
   color: rgba(255,255,255,0.4);
@@ -559,5 +730,35 @@ footer a:hover { color: var(--blanco); }
   
   .blog-list {
     padding: 1rem;
+  }
+
+  .post {
+    padding: 1.25rem;
+  }
+  
+  .post-title {
+    font-size: 1.8rem;
+  }
+  
+  .post-content {
+    font-size: 0.95rem;
+  }
+  
+  .post-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .post-content h3 {
+    font-size: 1.2rem;
+  }
+  
+  .post-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .post-tags {
+    justify-content: center;
   }
 }
