@@ -654,7 +654,8 @@ input[type="range"] {
 
 .post-footer {
   margin-top: 3rem;
-  padding-top: 2rem;
+  padding: 1rem;
+  border-radius: 10px;
   border-top: 2px solid var(--pergamino, #EDE8DC);
   display: flex;
   justify-content: space-between;
