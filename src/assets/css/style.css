@@ -72,12 +72,12 @@ nav {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #16A34A;
+  color: var(--brote);
   margin: 0 0 0.75rem;
 }
  
 .sec__titulo {
-  font-family: 'DM Serif Display', Georgia, serif;
+  font-family: var(--f-display);
   font-size: 2rem;
   font-weight: 400;
   margin: 0 0 1rem;
@@ -85,7 +85,7 @@ nav {
 }
  
 .sec__desc {
-  font-size: 1rem;
+  font-size: .9rem;
   line-height: 1.7;
   color: #4B5563;
   max-width: 560px;
