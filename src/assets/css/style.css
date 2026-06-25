@@ -430,6 +430,17 @@ input[type="range"] {
 .btn_borde:hover { background: var(--tierra); color: var(--blanco); }
 
 /* Blog list */
+
+.blog_section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
 .post-list {
   list-style: none;
   padding: 0;
