@@ -231,7 +231,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
 </section>
 
 <!-- ===== AGENDA ===== -->
-<section class="sec sec--agenda" id="agenda">
+<section class="sec sec--agenda" id="agenda" style="background: var(--pergamino);">
   <div class="sec__contenedor">
     <p class="sec__eyebrow">Agenda abierta</p>
     <h2 class="sec__titulo">Próximas instancias</h2>
