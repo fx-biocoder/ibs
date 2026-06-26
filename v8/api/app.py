@@ -3,18 +3,22 @@ IBS - Índice de Bioactividad del Suelo
 Microservicio Flask — Puerto 5000
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
+from sys import stderr
+from typing import Any
 import pickle
+import math
 import numpy as np
 import os
 
 app = Flask(__name__)
 
 BASE = os.path.dirname(__file__)
-MODELO = None
-SCALER = None
+MODELO: Any = None
+SCALER: Any = None
 
-def cargar_modelo():
+
+def cargar_modelo() -> None:
     global MODELO, SCALER
     ruta_modelo = os.path.join(BASE, "../model/output/ibs_model.pkl")
     ruta_scaler = os.path.join(BASE, "../model/output/ibs_scaler.pkl")
@@ -27,21 +31,20 @@ def cargar_modelo():
     print("Modelo cargado correctamente.")
 
 
-def formula_fallback(co2, mo, ph, temp):
-    import math
+def _normalizar(v, mn, mx) -> float:
+    return max(0.0, min(1.0, (v - mn) / (mx - mn)))
 
-    def normalizar(v, mn, mx):
-        return max(0.0, min(1.0, (v - mn) / (mx - mn)))
 
-    co2_n = normalizar(co2, 30, 600)
-    mo_n = normalizar(mo, 0.3, 6.0)
+def formula_fallback(co2: float, mo: float, ph: float, temp: float) -> float:
+    co2_n = _normalizar(co2, 30, 600)
+    mo_n = _normalizar(mo, 0.3, 6.0)
     ph_s = math.exp(-0.5 * ((ph - 6.5) / 1.2) ** 2)
     temp_s = math.exp(-0.5 * ((temp - 22.0) / 8.0) ** 2)
 
     return round((co2_n * 0.40 + mo_n * 0.30 + ph_s * 0.20 + temp_s * 0.10) * 100, 2)
 
 
-def asignar_estado(ibs):
+def asignar_estado(ibs: float) -> str:
     if ibs <= 30: return "critico"
     if ibs <= 50: return "bajo"
     if ibs <= 70: return "medio"
@@ -50,7 +53,7 @@ def asignar_estado(ibs):
 
 
 @app.route("/predecir", methods=["POST"])
-def predecir():
+def predecir() -> tuple[Response, int] | Response:
     datos = request.get_json()
 
     campos_requeridos = ["co2_mg_kg_dia", "mo_porcentaje", "ph", "temp_celsius"]
@@ -89,18 +92,17 @@ def predecir():
 
 
 @app.route("/health", methods=["GET"])
-def health():
+def health() -> Response:
     return jsonify({
         "status": "ok",
         "modelo_cargado": MODELO is not None
     })
 
 
-
 if __name__ == "__main__":
     try:
         cargar_modelo()
     except Exception as e:
-        print(f"Advertencia: no se pudo cargar el modelo ({e}). Usando fórmula fallback.")
+        print(f"Advertencia: no se pudo cargar el modelo ({e}). Usando fórmula fallback.", file=stderr)
 
     app.run(host="127.0.0.1", port=5000, debug=False)
