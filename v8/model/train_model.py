@@ -70,10 +70,10 @@ def guardar(modelo_rf: RandomForestRegressor,
     ruta_meta = os.path.join(carpeta, "model_meta.json")
 
     with open(ruta_modelo, "wb") as f:
-        pickle.dump(modelo_rf, f)
+        pickle.dump(modelo_rf, f)       # Warning: Expected type 'SupportsWrite[bytes]', got 'BufferedWriter' instead
 
     with open(ruta_scaler, "wb") as f:
-        pickle.dump(minmax_scaler, f)
+        pickle.dump(minmax_scaler, f)   # Warning: Expected type 'SupportsWrite[bytes]', got 'BufferedWriter' instead
 
     meta = {
         "version": MODELO_VERSION,
@@ -84,17 +84,20 @@ def guardar(modelo_rf: RandomForestRegressor,
     with open(ruta_meta, "w") as f:
         json.dump(meta, f, indent=2)
 
-    print(f"Modelo guardado: {ruta_modelo}")
-    print(f"Scaler guardado: {ruta_scaler}")
-    print(f"Metadata guardada: {ruta_meta}")
+    info = f"""Modelo guardado: {ruta_modelo}
+    Scaler guardado: {ruta_scaler}
+    Metadata guardada: {ruta_meta}
+    """
+    print(info)
 
 
 if __name__ == "__main__":
     ruta_csv = "output/dataset_ibs.csv"
 
     if not os.path.exists(ruta_csv):
-        print(f"ERROR: No se encontró {ruta_csv}", file=stderr)
-        print("Ejecutá primero: python generate_dataset.py", file=stderr)
+        print(f"""ERROR: No se encontró {ruta_csv}
+        Ejecutá primero: python generate_dataset.py
+        """, file=stderr)
         exit(1)
 
     df = cargar_datos(ruta_csv)

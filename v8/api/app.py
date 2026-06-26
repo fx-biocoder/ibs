@@ -4,6 +4,8 @@ Microservicio Flask — Puerto 5000
 """
 
 from flask import Flask, request, jsonify, Response
+from sys import stderr
+from typing import Any
 import pickle
 import math
 import numpy as np
@@ -12,8 +14,9 @@ import os
 app = Flask(__name__)
 
 BASE = os.path.dirname(__file__)
-MODELO = None
-SCALER = None
+MODELO: Any = None
+SCALER: Any = None
+
 
 def cargar_modelo() -> None:
     global MODELO, SCALER
@@ -100,6 +103,6 @@ if __name__ == "__main__":
     try:
         cargar_modelo()
     except Exception as e:
-        print(f"Advertencia: no se pudo cargar el modelo ({e}). Usando fórmula fallback.")
+        print(f"Advertencia: no se pudo cargar el modelo ({e}). Usando fórmula fallback.", file=stderr)
 
     app.run(host="127.0.0.1", port=5000, debug=False)
