@@ -5,10 +5,7 @@ Generador de Dataset Sintético
 
 import numpy as np
 import pandas as pd
-import json
 import os
-
-
 
 RANGOS = {
     "co2_mg_kg_dia": {"min": 30, "max": 600, "optimo": 400},
@@ -18,17 +15,17 @@ RANGOS = {
 }
 
 
-def normalizar(valor, minimo, maximo):
+def normalizar(valor: float, minimo: int, maximo: int) -> float:
     return max(0.0, min(1.0, (valor - minimo) / (maximo - minimo)))
 
-def score_ph(ph):
+def score_ph(ph: float) -> float:
     return float(np.exp(-0.5 * ((ph - 6.5) / 1.2) ** 2))
 
-def score_temp(temp):
+def score_temp(temp: float) -> float:
     return float(np.exp(-0.5 * ((temp - 22.0) / 8.0) ** 2))
 
 
-def calcular_ibs(co2, mo, ph, temp):
+def calcular_ibs(co2: float, mo: float, ph: float, temp: float) -> float:
     co2_norm = normalizar(co2, RANGOS["co2_mg_kg_dia"]["min"], RANGOS["co2_mg_kg_dia"]["max"])
     mo_norm = normalizar(mo, RANGOS["mo_porcentaje"]["min"], RANGOS["mo_porcentaje"]["max"])
     ph_sc = score_ph(ph)
@@ -38,7 +35,7 @@ def calcular_ibs(co2, mo, ph, temp):
     return round(ibs * 100, 2)
 
 
-def generar_dataset(n_registros=3000, semilla=42):
+def generar_dataset(n_registros: int = 3000, semilla: int = 42) -> pd.DataFrame:
     rng = np.random.default_rng(semilla)
     registros = []
 
@@ -62,26 +59,26 @@ def generar_dataset(n_registros=3000, semilla=42):
             "es_ruido": 1
         })
 
-    df = pd.DataFrame(registros)
-    return df
+    dataframe = pd.DataFrame(registros)
+    return dataframe
 
 
-def exportar(df, carpeta="output"):
+def exportar(dataframe: pd.DataFrame, carpeta: str = "output") -> str:
     os.makedirs(carpeta, exist_ok=True)
 
     ruta_csv = os.path.join(carpeta, "dataset_ibs.csv")
-    df.to_csv(ruta_csv, index=False)
+    dataframe.to_csv(ruta_csv, index=False)
     print(f"CSV exportado: {ruta_csv}")
 
     ruta_json = os.path.join(carpeta, "dataset_ibs.json")
-    df.to_json(ruta_json, orient="records", indent=2)
+    dataframe.to_json(ruta_json, orient="records", indent=2)
     print(f"JSON exportado: {ruta_json}")
 
     ruta_sql = os.path.join(carpeta, "dataset_ibs_inserts.sql")
     with open(ruta_sql, "w") as f:
         f.write("INSERT INTO dataset_sintetico (co2_mg_kg_dia, mo_porcentaje, ph, temp_celsius, ibs_score, es_ruido) VALUES\n")
         filas = []
-        for _, row in df.iterrows():
+        for _, row in dataframe.iterrows():
             filas.append(
                 f"({row['co2_mg_kg_dia']}, {row['mo_porcentaje']}, {row['ph']}, {row['temp_celsius']}, {row['ibs_score']}, {int(row['es_ruido'])})"
             )
@@ -91,19 +88,24 @@ def exportar(df, carpeta="output"):
     return ruta_csv
 
 
-def mostrar_resumen(df):
-    print("\n── RESUMEN DEL DATASET ──────────────────")
-    print(f"Total registros: {len(df)}")
-    print(f"IBS promedio: {df['ibs_score'].mean():.2f}")
-    print(f"IBS mínimo: {df['ibs_score'].min():.2f}")
-    print(f"IBS máximo: {df['ibs_score'].max():.2f}")
-    print()
-    print("Distribución por estado:")
+def mostrar_resumen(dataframe: pd.DataFrame) -> None:
+    resumen = f"""\n── RESUMEN DEL DATASET ──────────────────
+    Total registros: {len(dataframe)}
+    IBS promedio: {dataframe['ibs_score'].mean():.2f}
+    IBS mínimo: {dataframe['ibs_score'].min():.2f}"
+    IBS máximo: {dataframe['ibs_score'].max():.2f}\n\n
+    """
+
     bins = [0, 30, 50, 70, 85, 100]
     labels = ["critico", "bajo", "medio", "bueno", "excelente"]
-    df["estado"] = pd.cut(df["ibs_score"], bins=bins, labels=labels, include_lowest=True)
-    print(df["estado"].value_counts().sort_index().to_string())
-    print("─────────────────────────────────────────\n")
+    dataframe["estado"] = pd.cut(dataframe["ibs_score"], bins=bins, labels=labels, include_lowest=True)
+
+    distribucion = f"""Distribución por estado:
+    {dataframe["estado"].value_counts().sort_index().to_string()}
+    ─────────────────────────────────────────\n
+    """
+    resumen += distribucion
+    print(resumen)
 
 
 if __name__ == "__main__":
