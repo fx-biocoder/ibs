@@ -302,7 +302,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
     <div class="colaboradores_grid">
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/src/assets/images/pablo_kosak.jpg" alt="Foto de colaborador" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/pablo_kosak.jpg" alt="Foto de colaborador" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Pablo Kosak</div>
@@ -314,7 +314,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
       </div>
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/src/assets/images/facundo_martinez.jpg" alt="Foto de colaborador" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/facundo_martinez.jpg" alt="Foto de colaborador" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Facundo Martínez</div>
@@ -327,7 +327,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
       </div>
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/src/assets/images/avatar.png" alt="Foto de colaborador" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/avatar.png" alt="Foto de colaborador" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Andrés Hoyos</div>
