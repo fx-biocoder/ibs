@@ -487,6 +487,10 @@ input[type="range"] {
   text-align: center;
   padding-top: 2px;
 }
+
+.agenda__item--hoy {
+  border-left: 3px solid var(--brote);
+}
  
 .agenda__dia {
   display: block;
@@ -541,6 +545,19 @@ input[type="range"] {
 }
  
 .agenda__link:hover { text-decoration: underline; }
+
+.agenda__badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  background: var(--brote);
+  color: var(--tierra);
+  padding: 0.15em 0.5em;
+  border-radius: 999px;
+  margin-top: 0.35rem;
+}
 
 /* Blog list */
 
