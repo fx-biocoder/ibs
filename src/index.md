@@ -236,17 +236,33 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
     <p class="sec__eyebrow">Agenda abierta</p>
     <h2 class="sec__titulo">Próximas instancias</h2>
     <p class="sec__desc">Reuniones, revisiones y sprints abiertos a la comunidad. Todos los eventos son de participación libre salvo indicación.</p>
- 
+
     <div class="agenda">
+      {% assign hoy = site.time | date: "%Y-%m-%d" %}
       {% assign eventos = site.events | sort: 'date' %}
-      {% for event in eventos limit: 5 %}
+      {% assign eventos_vigentes = "" | split: "" %}
+
+      {% for event in eventos %}
+        {% assign fecha_evento = event.date | date: "%Y-%m-%d" %}
+        {% if fecha_evento >= hoy %}
+          {% assign eventos_vigentes = eventos_vigentes | push: event %}
+        {% endif %}
+      {% endfor %}
+
+      {% for event in eventos_vigentes limit: 5 %}
         {% assign dia = event.date | date: "%d" %}
         {% assign mes = event.date | date: "%b" %}
-        
-        <div class="agenda__item">
+        {% assign fecha_evento = event.date | date: "%Y-%m-%d" %}
+        {% assign es_hoy = false %}
+        {% if fecha_evento == hoy %}{% assign es_hoy = true %}{% endif %}
+
+        <div class="agenda__item{% if es_hoy %} agenda__item--hoy{% endif %}">
           <div class="agenda__fecha">
             <span class="agenda__dia">{{ dia }}</span>
             <span class="agenda__mes">{{ mes }}</span>
+            {% if es_hoy %}
+              <span class="agenda__badge">Hoy</span>
+            {% endif %}
           </div>
           <div class="agenda__contenido">
             <h3 class="agenda__titulo">{{ event.title }}</h3>
@@ -260,8 +276,8 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
                 {% endcase %}
               </span>
             </p>
-            <a href="{{ event.link }}" 
-               {% if event.link contains 'http' %}target="_blank"{% endif %} 
+            <a href="{{ event.link }}"
+               {% if event.link contains 'http' %}target="_blank"{% endif %}
                class="agenda__link">
               <i class="{{ event.link_icon }}" aria-hidden="true"></i> {{ event.link_text }}
             </a>
@@ -271,7 +287,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
         <p class="agenda__vacio">No hay eventos programados. ¡Próximamente!</p>
       {% endfor %}
     </div>
- 
+
     <p class="sec__nota">
       ¿Querés proponer un evento?
       <a href="https://github.com/stndcx/ibs/issues" target="_blank">Abrí un issue en GitHub</a>
