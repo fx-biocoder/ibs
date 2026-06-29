@@ -295,6 +295,53 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
   </div>
 </section>
 
+<section class="colaboradores_section" id="colaboradores">
+  <div class="colaboradores_inner">
+    <h2 class="seccion_titulo">Colaboradores</h2>
+    <p class="seccion_sub">Personas que construyen y mejoran el Índice IBS</p>
+    <div class="colaboradores_grid">
+      <div class="colaborador_card">
+        <div class="colaborador_avatar">
+          <img src="../assets/images/pablo_kosak.jpg" alt="Foto de colaborador" loading="lazy">
+        </div>
+        <div class="colaborador_info">
+          <div class="colaborador_nombre">Pablo Kosak</div>
+          <div class="colaborador_rol">T&eacute;cnico Agr&oacute;nomo</div>
+          <div class="colaborador_contacto">
+            <a href="mailto:kosakpablo@gmail.com" target="_blank"><i class="bi bi-send"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="colaborador_card">
+        <div class="colaborador_avatar">
+          <img src="../assets/images/facundo_martinez.jpg" alt="Foto de colaborador" loading="lazy">
+        </div>
+        <div class="colaborador_info">
+          <div class="colaborador_nombre">Facundo Martínez</div>
+          <div class="colaborador_rol">Software Engineer</div>
+          <div class="colaborador_contacto">
+            <a href="https://www.linkedin.com/in/fxmartinez" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/fx-biocoder" target="_blank"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="colaborador_card">
+        <div class="colaborador_avatar">
+          <img src="../assets/images/avatar.png" alt="Foto de colaborador" loading="lazy">
+        </div>
+        <div class="colaborador_info">
+          <div class="colaborador_nombre">Andrés Hoyos</div>
+          <div class="colaborador_rol">Software Architect</div>
+          <div class="colaborador_contacto">
+            <a href="https://www.linkedin.com/in/andreshoyos/" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/andres-victor-hoyos" target="_blank"><i class="bi bi-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA FINAL -->
 <section class="cta_section">
   <h2 class="seccion_titulo">¿Querés integrar o colaborar?</h2>
