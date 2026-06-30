@@ -836,7 +836,7 @@ input[type="range"] {
 
 .post-tags .tag:hover { background: var(--tierra, #1C3A2A); color: var(--blanco, #FFFFFF); }
 
-
+/* COLABORADORES */
 .empresas_section {
   padding: 5rem 2rem;
   border-top: 1px solid rgba(0,0,0,0.06);
@@ -845,7 +845,7 @@ input[type="range"] {
 .empresas_inner { max-width: var(--max); margin: 0 auto; }
 .empresas_grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
   margin-top: 1rem;
 }
@@ -855,7 +855,7 @@ input[type="range"] {
   gap: 0.75rem;
   background: var(--blanco);
   border-radius: var(--radio);
-  padding: 0.8rem 0.8rem 0.6rem 0.8rem;
+  padding: .6rem .4rem;
   border-left: 4px solid var(--brote);
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   min-width: 0;
@@ -877,8 +877,8 @@ input[type="range"] {
 }
 .empresa_badge i { display: block; }
 .empresa_logo {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: var(--radio);
   overflow: hidden;
   flex-shrink: 0;
@@ -910,12 +910,6 @@ input[type="range"] {
   text-decoration: none;
 }
 .empresa_contacto a:hover { color: var(--brote); }
-
-@media (max-width: 400px) {
-  .colaboradores_inner { padding: 0; }
-  .empresas_grid { grid-template-columns: 1fr; }
-
-}
 
 .colaboradores_section {
   background: var(--blanco);
@@ -998,49 +992,27 @@ footer {
 footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
 footer a:hover { color: var(--blanco); }
 
+@media (max-width: 400px) {
+  .empresas_inner { padding: 0; }
+  .empresas_grid { grid-template-columns: 1fr; }
+
+  .colaboradores_inner { padding: 0; }
+  .colaboradores_grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 600px) {
   .nav_links { display: none; }
   .hero { padding: 4rem 1.5rem 3.5rem; }
   .demo_sliders { flex-direction: column; }
-  .blog-post {
-    padding: 1.25rem;
-  }
-  
-  .blog-post h2 {
-    font-size: 1.3rem;
-  }
-  
-  .blog-list {
-    padding: 1rem;
-  }
+  .blog-post { padding: 1.25rem; }
+  .blog-post h2 { font-size: 1.3rem; }
+  .blog-list { padding: 1rem; }
 
-  .post {
-    padding: 1.25rem;
-  }
-  
-  .post-title {
-    font-size: 1.8rem;
-  }
-  
-  .post-content {
-    font-size: 0.95rem;
-  }
-  
-  .post-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .post-content h3 {
-    font-size: 1.2rem;
-  }
-  
-  .post-footer {
-    flex-direction: column;
-    align-items: stretch;
-    text-align: center;
-  }
-  
-  .post-tags {
-    justify-content: center;
-  }
+  .post { padding: 1.25rem; }
+  .post-title { font-size: 1.8rem; }
+  .post-content { font-size: 0.95rem; }
+  .post-content h2 { font-size: 1.5rem; }
+  .post-content h3 { font-size: 1.2rem; }
+  .post-footer { flex-direction: column; align-items: stretch; text-align: center; }
+  .post-tags { justify-content: center; }
 }

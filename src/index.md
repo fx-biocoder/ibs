@@ -295,6 +295,64 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
   </div>
 </section>
 
+<section class="empresas_section" id="empresas">
+  <div class="empresas_inner">
+    <h2 class="seccion_titulo">Proyectos y espacios colaboradores</h2>
+    <p class="seccion_sub">Iniciativas y proyectos que apoyan al IBS proporcionando espacios físicos o virtuales, difusión, comunicación y contextos de aplicación y experimentación.</p>
+    <div class="empresas_grid">
+      <div class="empresa_card" style="border-left: 4px solid #8B5CF6;">
+        <div class="empresa_badge tech">
+          <i class="bi bi-bookmark-fill"></i>
+        </div>
+        <div class="empresa_logo">
+          <img src="{{ site.baseurl }}/assets/images/reservanatural_tigre.jpg" loading="lazy">
+        </div>
+        <div class="empresa_info">
+          <div class="empresa_nombre">Reserva Natural Tigre</div>
+          <div class="empresa_rol">Experimentación en entorno real</div>
+          <div class="empresa_contacto">
+            <a href="https://www.instagram.com/reservanatural.tigre" target="_blank"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.facebook.com/ReservaNaturalTigre" target="_blank"><i class="bi bi-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="empresa_card" style="border-left: 4px solid #8B5CF6;">
+        <div class="empresa_badge tech">
+          <i class="bi bi-bookmark-fill"></i>
+        </div>
+        <div class="empresa_logo">
+          <img src="{{ site.baseurl }}/assets/images/comunidadverde.jpg" loading="lazy">
+        </div>
+        <div class="empresa_info">
+          <div class="empresa_nombre">Comunidad Verde ONG</div>
+          <div class="empresa_rol">Contexto y validación ambiental</div>
+          <div class="empresa_contacto">
+            <a href="https://comunidadverde.ar" target="_blank"><i class="bi bi-globe2"></i></a>
+            <a href="https://www.instagram.com/comunidadverde.ong" target="_blank"><i class="bi bi-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="empresas_grid">
+      <div class="empresa_card" style="border-left: 4px solid #8B5CF6;">
+        <div class="empresa_badge tech">
+          <i class="bi bi-bookmark-fill"></i>
+        </div>
+        <div class="empresa_logo">
+          <img src="{{ site.baseurl }}/assets/images/whatido_logo.jpg" loading="lazy">
+        </div>
+        <div class="empresa_info">
+          <div class="empresa_nombre">whatIDO_</div>
+          <div class="empresa_rol">Comunidad IT Argentina</div>
+          <div class="empresa_contacto">
+            <a href="https://whatido.tech/" target="_blank"><i class="bi bi-globe2"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="colaboradores_section" id="colaboradores">
   <div class="colaboradores_inner">
     <h2 class="seccion_titulo">Colaboradores</h2>
@@ -302,7 +360,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
     <div class="colaboradores_grid">
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/assets/images/pablo_kosak.jpg" alt="Foto de colaborador" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/pablo_kosak.jpg" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Pablo Kosak</div>
@@ -314,7 +372,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
       </div>
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/assets/images/facundo_martinez.jpg" alt="Foto de colaborador" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/facundo_martinez.jpg" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Facundo Martínez</div>
@@ -327,7 +385,7 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
       </div>
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/assets/images/avatar.png" alt="Foto de colaborador" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/avatar.png" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Andrés Hoyos</div>
