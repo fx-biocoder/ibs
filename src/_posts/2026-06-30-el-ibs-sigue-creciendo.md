@@ -6,11 +6,11 @@ categories: [actualidad]
 tags: [ibs, comunidad, colaboradores]
 ---
 
-## El IBS sigue creciendo (y no lo hace solo)
-
 <div class="video-container">
 <iframe src="https://www.youtube.com/embed/fycru1RpHhI?si=zV98cB3dWt--Zega" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+
+## El IBS sigue creciendo (y no lo hace solo)
 
 Una de las ideas centrales del IBS es que no se construye en abstracto ni en soledad. Necesita territorio, personas, pruebas reales y diálogo constante. Por eso nos alegra contar que se sumaron nuevos proyectos y espacios colaboradores.
 
