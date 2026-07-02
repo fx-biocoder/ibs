@@ -34,7 +34,6 @@ IBS = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score 
 |---|---|---|---|
 | CO₂ respiración basal | mg CO₂ / kg suelo / día | 35% | Lineal — rango 30–600 |
 | Materia Orgánica | % | 25% | Lineal — rango 0.3–6.0 |
-| Deshidrogenasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
 | Beta-glucosidasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
 | Fosfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
 | Arilsulfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
