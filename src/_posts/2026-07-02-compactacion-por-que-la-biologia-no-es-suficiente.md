@@ -14,8 +14,6 @@ Sin embargo, en sistemas productivos reales, la compactación no actúa sola ni 
 Un suelo puede mostrar buena actividad microbiana, niveles adecuados de materia orgánica y condiciones químicas aceptables, pero aun así fallar en sostener el cultivo.  
 En muchos casos, la razón es simple: las raíces no pueden crecer.
 
----
-
 ## Qué entendemos por compactación
 
 La compactación del suelo es el aumento de la resistencia mecánica que enfrenta una raíz al intentar crecer y explorar el perfil.  
@@ -29,8 +27,6 @@ Desde el punto de vista funcional:
 
 La compactación, entonces, no elimina recursos: impide que el cultivo los use.
 
----
-
 ## Por qué no la incorporamos como un parámetro más
 
 El IBS nace como un índice biológico, enfocado en procesos vivos:
@@ -43,8 +39,6 @@ Agregar la compactación como una variable más dentro de la fórmula principal 
 Por eso tomamos una decisión conceptual clara:
 
 > La compactación no define el potencial del suelo, define el límite para expresarlo.
-
----
 
 ## El criterio IBS: potencial vs. funcionalidad
 
@@ -64,8 +58,6 @@ Es lo que el suelo realmente puede entregar en ese ambiente.
 
 La compactación actúa entonces como un factor reductor, no como un componente estructural del índice.
 
----
-
 ## Cómo traducimos la compactación en pérdida funcional
 
 La relación entre resistencia a la penetración y crecimiento radicular no es lineal.
@@ -82,8 +74,6 @@ Por eso utilizamos una función logística (sigmoide), que permite representar e
 
 El resultado es un Factor de Compactación entre 0 y 1.
 
----
-
 ## Qué significa el Factor de Compactación
 
 El factor expresa qué proporción del potencial del suelo sigue siendo accesible para el cultivo.
@@ -99,8 +89,6 @@ El factor expresa qué proporción del potencial del suelo sigue siendo accesibl
 
 Este factor no castiga al suelo; describe una realidad física.
 
----
-
 ## De IBS base a IBS funcional
 
 El IBS funcional surge de aplicar ese factor al índice biológico:
@@ -110,8 +98,6 @@ IBS funcional = IBS base × Factor de compactación
 Esto permite responder una pregunta clave:
 
 ¿Cuánto de lo que el suelo puede hacer, realmente está ocurriendo en el lote?
-
----
 
 ## Por qué este enfoque es útil
 
@@ -130,8 +116,6 @@ El IBS funcional permite priorizar decisiones:
 - dónde descompactar,
 - dónde mejorar biología,
 - y dónde no intervenir.
-
----
 
 ## La compactación no destruye el suelo, le pone un techo
 
