@@ -21,9 +21,9 @@ A diferencia de análisis convencionales que miden nutrientes de forma aislada, 
 ## Fórmula base
 
 ```
-IBS = (CO2_norm × 0.25) + (MO_norm × 0.25) + (pH_score × 0.10) + (Temp_score × 0.10) +
-      (Enz_Desh_norm × 0.06) + (Enz_Beta_norm × 0.06) + (Enz_Fosf_norm × 0.06) + 
-      (Enz_Aril_norm × 0.06) + (Enz_Urea_score × 0.06)
+IBS = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score × 0.10) +
+      (Enz_Desh_norm × 0.0375) + (Enz_Beta_norm × 0.0375) + (Enz_Fosf_norm × 0.0375) + 
+      (Enz_Aril_norm × 0.0375) + (Enz_Urea_score × 0.0375)
 ```
 
 > **Nota:** Los pesos están desacoplados de la ecuación y se pueden ajustar mediante configuración.
