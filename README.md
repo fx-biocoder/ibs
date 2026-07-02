@@ -185,7 +185,7 @@ Respuesta esperada:
 ```python
 import math
 
-PESOS = {"co2": 0.25, "mo": 0.25, "ph": 0.10, "temp": 0.10, "enz_deshidrogenasa": 0.06, "enz_beta_glucosidasa": 0.06, "enz_fosfatasa": 0.06, "enz_arilsulfatasa": 0.06, "enz_ureasa": 0.06}
+PESOS = {"co2": 0.35, "mo": 0.25, "ph": 0.15, "temp": 0.10, "enz_deshidrogenasa": 0.0375, "enz_beta_glucosidasa": 0.0375, "enz_fosfatasa": 0.0375, "enz_arilsulfatasa": 0.0375, "enz_ureasa": 0.0375}
 
 def ibs_calcular(co2, mo, ph, temp, desh, beta, fosf, aril, urea):
     co2_n   = max(0, min(1, (co2  - 30)  / (600  - 30)))
