@@ -17,18 +17,15 @@ BASE = os.path.dirname(__file__)
 MODELO: Any = None
 SCALER: Any = None
 
-
-# La deshidrogenasa se eliminó: es redundante con CO₂ (ambas miden
-# actividad microbiana general). Su peso (6%) se redistribuye a co2.
 PESOS = {
-    "co2": 0.31,
+    "co2": 0.35,
     "mo": 0.25,
-    "ph": 0.10,
+    "ph": 0.15,
     "temp": 0.10,
-    "enz_beta_glucosidasa": 0.06,
-    "enz_fosfatasa": 0.06,
-    "enz_arilsulfatasa": 0.06,
-    "enz_ureasa": 0.06
+    "enz_beta_glucosidasa": 0.0375,
+    "enz_fosfatasa": 0.0375,
+    "enz_arilsulfatasa": 0.0375,
+    "enz_ureasa": 0.0375
 }
 
 
