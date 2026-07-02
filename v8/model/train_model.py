@@ -41,8 +41,8 @@ def entrenar(dataframe: pd.DataFrame) -> tuple[RandomForestRegressor, MinMaxScal
     X_test_sc = minmax_scaler.transform(X_test)
 
     modelo_rf = RandomForestRegressor(
-        n_estimators=300,
-        max_depth=15,
+        n_estimators=320,
+        max_depth=12,
         random_state=42,
         n_jobs=-1
     )
