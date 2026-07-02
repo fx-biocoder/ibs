@@ -256,14 +256,16 @@ input[type="range"] {
   margin-top: 0.3rem;
 }
 
-.formula_section {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 5rem 2rem;
-}
+.formula_section { max-width: var(--max); margin: 0 auto; padding: 5rem 2rem; }
 .seccion_titulo {
   font-family: var(--f-display);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--tierra);
+  margin-bottom: 0.5rem;
+}
+.seccion_titulo_h3 {
+  font-family: var(--f-display);
+  font-size: clamp(1.6rem, 4vw, 1.8rem);
   color: var(--tierra);
   margin-bottom: 0.5rem;
 }
@@ -273,6 +275,7 @@ input[type="range"] {
   margin-bottom: 2.5rem;
   max-width: 560px;
 }
+.seccion_sub_com { color: var(--grafito); font-size: 0.95rem; margin-bottom: 2.5rem; }
 
 .formula_bloque {
   background: var(--tierra);

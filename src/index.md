@@ -73,22 +73,20 @@ description: Índice científico de bioactividad del suelo que integra respiraci
       Abierta, documentada y ajustable por zona climática.
       Los pesos reflejan la importancia relativa de cada parámetro en la actividad biológica del suelo.
     </p>
-
     <div class="formula_bloque">
-<span class="comentario"># Índice de Bioactividad del Suelo</span><br>
-IBS = (<span class="clave">CO2_norm</span>  × 0.40) +
-      (<span class="clave">MO_norm</span>   × 0.30) +
-      (<span class="clave">pH_score</span>  × 0.20) +
-      (<span class="clave">Temp_score</span> × 0.10)
-<br><br>
-<span class="comentario"># Normalización lineal (CO₂ y MO)</span><br>
-valor_norm = (medicion - rango_min) / (rango_max - rango_min)
-<br><br>
-<span class="comentario"># Curva gaussiana (pH y Temperatura)</span><br>
-ph_score   = exp(-0.5 × ((ph   - 6.5) / 1.2)²)<br>
-temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
+      <span class="comentario"># Índice de Bioactividad del Suelo</span><br>
+      IBS = (<span class="clave">CO2_norm</span>  × 0.40) +
+            (<span class="clave">MO_norm</span>   × 0.30) +
+            (<span class="clave">pH_score</span>  × 0.20) +
+            (<span class="clave">Temp_score</span> × 0.10)
+      <br><br>
+      <span class="comentario"># Normalización lineal (CO₂ y MO)</span><br>
+      valor_norm = (medicion - rango_min) / (rango_max - rango_min)
+      <br><br>
+      <span class="comentario"># Curva gaussiana (pH y Temperatura)</span><br>
+      ph_score   = exp(-0.5 × ((ph   - 6.5) / 1.2)²)<br>
+      temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
     </div>
-
     <div class="params_grid">
       <div class="param_card">
         <div class="param_nombre">CO₂ — Respiración basal</div>
@@ -111,6 +109,20 @@ temp_score = exp(-0.5 × ((temp - 22.0) / 8.0)²)
         <div class="param_detalle">Factor corrector de cinética biológica. °C a 10 cm de profundidad. Óptimo: 15–28°C.</div>
       </div>
     </div>
+  </div>
+
+  <div class="formula_section">
+    <h2 class="seccion_titulo">Compactación - El Enfoque IBS</h2>
+    <p class="seccion_sub">Busca la pérdida de rendimiento asociada a la resistencia a la penetración.</p>
+    <h3 class="seccion_titulo_h3">Factor de Compactación</h3>
+    <p class="seccion_sub_com">Representa la fracción del potencial productivo que se mantiene frente a una resistencia mecánica determinada del suelo.<br><br>Cuando el suelo se compacta, las raíces tienen dificultad para crecer, explorar agua y nutrientes y sostener el cultivo en momentos críticos. Aunque el suelo tenga buena biología, la compactación puede impedir que ese potencial se exprese.<br><br>El enfoque IBS no mide la compactación como un problema aislado. Evalúa cuánto del potencial productivo del suelo se pierde cuando la resistencia mecánica dificulta el crecimiento radicular.<br><br>Un suelo puede estar biológicamente sano, pero funcionalmente limitado.</p>
+    <div class="formula_bloque">
+      <span class="comentario"># Función Logística (Sigmoide)</span><br>
+      Factor = 1 / (1 + e^(a·(kPa - b)))<br><br>
+      <span class="comentario"># Resultado</span><br>
+      IBS Funcional = IBS base × Factor
+    </div>
+    <p class="seccion_sub_com">El IBS funcional permite separar potencial de limitaciones reales, ayudando a decidir dónde conviene intervenir y dónde no.</p>
   </div>
 </section>
 
