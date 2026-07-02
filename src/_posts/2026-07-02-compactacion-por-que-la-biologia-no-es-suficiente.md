@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Compactación: por qué la biología no es suficiente"
-date: 2026-06-22 10:00:00 -0300
+date: 2026-07-02 10:00:00 -0300
 categories: [actualidad]
 tags: [compactación, ibs, suelo, bioactividad]
 ---
