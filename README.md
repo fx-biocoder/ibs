@@ -21,32 +21,43 @@ A diferencia de análisis convencionales que miden nutrientes de forma aislada, 
 ## Fórmula base
 
 ```
-IBS = (CO2_norm × 0.40) + (MO_norm × 0.30) + (pH_score × 0.20) + (Temp_score × 0.10)
+IBS = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score × 0.10) +
+      (Enz_Desh_norm × 0.0375) + (Enz_Beta_norm × 0.0375) + (Enz_Fosf_norm × 0.0375) + 
+      (Enz_Aril_norm × 0.0375) + (Enz_Urea_score × 0.0375)
 ```
 
-### Parámetros y pesos
+> **Nota:** Los pesos están desacoplados de la ecuación y se pueden ajustar mediante configuración.
+
+### Parámetros y pesos base
 
 | Parámetro | Medición | Peso | Método de normalización |
 |---|---|---|---|
-| CO₂ respiración basal | mg CO₂ / kg suelo / día | 40% | Lineal — rango 30–600 |
-| Materia Orgánica | % | 30% | Lineal — rango 0.3–6.0 |
-| pH del suelo | Escala 0–14 | 20% | Gaussiana — pico en 6.5 |
+| CO₂ respiración basal | mg CO₂ / kg suelo / día | 35% | Lineal — rango 30–600 |
+| Materia Orgánica | % | 25% | Lineal — rango 0.3–6.0 |
+| Beta-glucosidasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Fosfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Arilsulfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Ureasa | U / g | 3.75% | Gaussiana — pico en 5.0 (penaliza exceso) |
+| pH del suelo | Escala 0–14 | 15% | Gaussiana — pico en 6.5 |
 | Temperatura | °C a 10cm | 10% | Gaussiana — pico en 22°C |
 
 ### Normalización
 
-**CO₂ y MO — normalización lineal:**
+**CO₂, MO y mayoría de Enzimas — normalización lineal:**
 ```python
 valor_norm = (medicion - rango_min) / (rango_max - rango_min)
 ```
 
-**pH y Temperatura — curva gaussiana:**
+**pH, Temperatura y Ureasa — curva gaussiana:**
 ```python
 # pH: óptimo biológico en 6.5
 ph_score = exp(-0.5 * ((ph - 6.5) / 1.2) ** 2)
 
 # Temperatura: óptimo en 22°C
 temp_score = exp(-0.5 * ((temp - 22.0) / 8.0) ** 2)
+
+# Ureasa: óptimo en 5.0, excesos penalizan (riesgo de lixiviación)
+ureasa_score = exp(-0.5 * ((ureasa - 5.0) / 2.5) ** 2)
 ```
 
 Todos los valores se clampean a [0, 1] antes de aplicar los pesos. El resultado se multiplica por 100.
@@ -136,7 +147,7 @@ cd ibs
 mysql -u root -p < sql/schema.sql
 
 # 3. Dataset y modelo
-cd python/model
+cd v8/model
 pip install -r ../requirements.txt --user
 python generate_dataset.py
 python train_model.py
@@ -154,7 +165,7 @@ python app.py
 ```bash
 curl -X POST http://localhost:5000/predecir \
   -H "Content-Type: application/json" \
-  -d '{"co2_mg_kg_dia": 280, "mo_porcentaje": 2.4, "ph": 6.5, "temp_celsius": 21}'
+  -d '{"co2_mg_kg_dia": 280, "mo_porcentaje": 2.4, "ph": 6.5, "temp_celsius": 21, "enz_deshidrogenasa": 7.5, "enz_beta_glucosidasa": 6.0, "enz_fosfatasa": 5.5, "enz_arilsulfatasa": 6.8, "enz_ureasa": 4.5}'
 ```
 
 Respuesta esperada:
@@ -174,14 +185,28 @@ Respuesta esperada:
 ```python
 import math
 
-def ibs_calcular(co2, mo, ph, temp):
-    co2_norm   = max(0, min(1, (co2  - 30)  / (600  - 30)))
-    mo_norm    = max(0, min(1, (mo   - 0.3) / (6.0  - 0.3)))
-    ph_score   = math.exp(-0.5 * ((ph   - 6.5) / 1.2) ** 2)
-    temp_score = math.exp(-0.5 * ((temp - 22.0) / 8.0) ** 2)
-    return round(((co2_norm * 0.40) + (mo_norm * 0.30) + (ph_score * 0.20) + (temp_score * 0.10)) * 100, 2)
+PESOS = {"co2": 0.35, "mo": 0.25, "ph": 0.15, "temp": 0.10, "enz_deshidrogenasa": 0.0375, "enz_beta_glucosidasa": 0.0375, "enz_fosfatasa": 0.0375, "enz_arilsulfatasa": 0.0375, "enz_ureasa": 0.0375}
 
-print(ibs_calcular(280, 2.4, 6.5, 21))  # → ~63.4
+def ibs_calcular(co2, mo, ph, temp, desh, beta, fosf, aril, urea):
+    co2_n   = max(0, min(1, (co2  - 30)  / (600  - 30)))
+    mo_n    = max(0, min(1, (mo   - 0.3) / (6.0  - 0.3)))
+    ph_s   = math.exp(-0.5 * ((ph   - 6.5) / 1.2) ** 2)
+    temp_s = math.exp(-0.5 * ((temp - 22.0) / 8.0) ** 2)
+    
+    desh_n = max(0, min(1, (desh - 0.0) / (10.0 - 0.0)))
+    beta_n = max(0, min(1, (beta - 0.0) / (10.0 - 0.0)))
+    fosf_n = max(0, min(1, (fosf - 0.0) / (10.0 - 0.0)))
+    aril_n = max(0, min(1, (aril - 0.0) / (10.0 - 0.0)))
+    urea_s = math.exp(-0.5 * ((urea - 5.0) / 2.5) ** 2)
+    
+    score = (
+        co2_n * PESOS["co2"] + mo_n * PESOS["mo"] + ph_s * PESOS["ph"] + temp_s * PESOS["temp"] +
+        desh_n * PESOS["enz_deshidrogenasa"] + beta_n * PESOS["enz_beta_glucosidasa"] +
+        fosf_n * PESOS["enz_fosfatasa"] + aril_n * PESOS["enz_arilsulfatasa"] + urea_s * PESOS["enz_ureasa"]
+    )
+    return round(score * 100, 2)
+
+print(ibs_calcular(280, 2.4, 6.5, 21, 7.5, 6.0, 5.5, 6.8, 4.5))  # → ~68.1
 ```
 
 ---
@@ -196,6 +221,11 @@ RANGOS = {
     "mo_porcentaje":  {"min": 0.3, "max": 6.0},
     "ph":             {"min": 4.5, "max": 9.0},
     "temp_celsius":   {"min": 5.0, "max": 40.0},
+    "enz_deshidrogenasa": {"min": 0.0, "max": 10.0},
+    "enz_beta_glucosidasa": {"min": 0.0, "max": 10.0},
+    "enz_fosfatasa": {"min": 0.0, "max": 10.0},
+    "enz_arilsulfatasa": {"min": 0.0, "max": 10.0},
+    "enz_ureasa": {"min": 0.0, "max": 10.0},
 }
 ```
 

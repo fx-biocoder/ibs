@@ -14,7 +14,10 @@ from sklearn.preprocessing import MinMaxScaler
 from sys import stderr
 from typing import Any
 
-FEATURES = ["co2_mg_kg_dia", "mo_porcentaje", "ph", "temp_celsius"]
+FEATURES = [
+    "co2_mg_kg_dia", "mo_porcentaje", "ph", "temp_celsius",
+    "enz_beta_glucosidasa", "enz_fosfatasa", "enz_arilsulfatasa", "enz_ureasa"
+]
 TARGET = "ibs_score"
 MODELO_VERSION = "rf_v1"
 
