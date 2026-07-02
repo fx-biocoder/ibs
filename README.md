@@ -32,14 +32,14 @@ IBS = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score 
 
 | Parámetro | Medición | Peso | Método de normalización |
 |---|---|---|---|
-| CO₂ respiración basal | mg CO₂ / kg suelo / día | 25% | Lineal — rango 30–600 |
+| CO₂ respiración basal | mg CO₂ / kg suelo / día | 35% | Lineal — rango 30–600 |
 | Materia Orgánica | % | 25% | Lineal — rango 0.3–6.0 |
-| Deshidrogenasa | U / g | 6% | Lineal — rango 0.0–10.0 |
-| Beta-glucosidasa | U / g | 6% | Lineal — rango 0.0–10.0 |
-| Fosfatasa | U / g | 6% | Lineal — rango 0.0–10.0 |
-| Arilsulfatasa | U / g | 6% | Lineal — rango 0.0–10.0 |
-| Ureasa | U / g | 6% | Gaussiana — pico en 5.0 (penaliza exceso) |
-| pH del suelo | Escala 0–14 | 10% | Gaussiana — pico en 6.5 |
+| Deshidrogenasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Beta-glucosidasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Fosfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Arilsulfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
+| Ureasa | U / g | 3.75% | Gaussiana — pico en 5.0 (penaliza exceso) |
+| pH del suelo | Escala 0–14 | 15% | Gaussiana — pico en 6.5 |
 | Temperatura | °C a 10cm | 10% | Gaussiana — pico en 22°C |
 
 ### Normalización
