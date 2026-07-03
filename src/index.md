@@ -397,7 +397,7 @@ description: Índice científico de bioactividad del suelo que integra respiraci
       </div>
       <div class="colaborador_card">
         <div class="colaborador_avatar">
-          <img src="{{ site.baseurl }}/assets/images/avatar.png" loading="lazy">
+          <img src="{{ site.baseurl }}/assets/images/andreshoyos.jpg" loading="lazy">
         </div>
         <div class="colaborador_info">
           <div class="colaborador_nombre">Andrés Hoyos</div>
