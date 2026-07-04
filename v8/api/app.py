@@ -80,6 +80,30 @@ def asignar_estado(ibs: float) -> str:
     return "excelente"
 
 
+def factor_compactacion(kpa: float) -> float:
+    """Devuelve el factor corrector multiplicativo según resistencia a la penetración.
+
+    Umbrales validados agronómicamente (Región pampeana húmeda):
+      0 – 1500 kPa : Óptimo          → 1.00 (sin restricción)
+      1500 – 2000  : Restricción leve → 0.70 (desvío energético radicular)
+      2000 – 2500  : Daño estructural → 0.35 (pérdida 20–60% rendimiento)
+      > 2500       : Impedancia severa → 0.10 (crecimiento radicular detenido)
+
+    Lectura válida en Capacidad de Campo (24–48hs post lluvia o riego).
+    """
+    if kpa < 1500: return 1.00
+    if kpa < 2000: return 0.70
+    if kpa < 2500: return 0.35
+    return 0.10
+
+
+def estado_compactacion(kpa: float) -> str:
+    if kpa < 1500: return "optimo"
+    if kpa < 2000: return "restriccion_leve"
+    if kpa < 2500: return "dano_estructural"
+    return "impedancia_severa"
+
+
 @app.route("/predecir", methods=["POST"])
 def predecir() -> tuple[Response, int] | Response:
     datos = request.get_json()
@@ -102,20 +126,33 @@ def predecir() -> tuple[Response, int] | Response:
     aril = float(datos["enz_arilsulfatasa"])
     urea = float(datos["enz_ureasa"])
 
+    # kpa es opcional — factor corrector de compactación post-inferencia
+    kpa: float | None = float(datos["kpa"]) if "kpa" in datos else None
+
     if MODELO and SCALER:
         entrada = np.array([[co2, mo, ph, temp, beta, fosf, aril, urea]])
         entrada_sc = SCALER.transform(entrada)
-        ibs = round(float(MODELO.predict(entrada_sc)[0]), 2)
-        ibs = max(0.0, min(100.0, ibs))
+        ibs_base = round(float(MODELO.predict(entrada_sc)[0]), 2)
+        ibs_base = max(0.0, min(100.0, ibs_base))
         fuente = "modelo_ml"
     else:
-        ibs = formula_fallback(co2, mo, ph, temp, beta, fosf, aril, urea)
+        ibs_base = formula_fallback(co2, mo, ph, temp, beta, fosf, aril, urea)
         fuente = "formula_fallback"
 
-    estado = asignar_estado(ibs)
+    # Aplicar corrección de compactación si se proveyó kpa
+    if kpa is not None:
+        fc = factor_compactacion(kpa)
+        ibs_score = round(max(0.0, min(100.0, ibs_base * fc)), 2)
+        ec = estado_compactacion(kpa)
+    else:
+        ibs_score = ibs_base
+        fc = None
+        ec = None
 
-    return jsonify({
-        "ibs_score": ibs,
+    estado = asignar_estado(ibs_score)
+
+    respuesta: dict = {
+        "ibs_score": ibs_score,
         "estado": estado,
         "fuente": fuente,
         "input": {
@@ -128,7 +165,15 @@ def predecir() -> tuple[Response, int] | Response:
             "enz_arilsulfatasa": aril,
             "enz_ureasa": urea
         }
-    })
+    }
+
+    if kpa is not None:
+        respuesta["ibs_base"] = ibs_base
+        respuesta["kpa"] = kpa
+        respuesta["factor_compactacion"] = fc
+        respuesta["estado_compactacion"] = ec
+
+    return jsonify(respuesta)
 
 
 @app.route("/health", methods=["GET"])
