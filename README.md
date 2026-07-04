@@ -21,10 +21,27 @@ A diferencia de análisis convencionales que miden nutrientes de forma aislada, 
 ## Fórmula base
 
 ```
-IBS = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score × 0.10) +
-      (Enz_Desh_norm × 0.0375) + (Enz_Beta_norm × 0.0375) + (Enz_Fosf_norm × 0.0375) + 
-      (Enz_Aril_norm × 0.0375) + (Enz_Urea_score × 0.0375)
+IBS_base = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score × 0.10) +
+           (Enz_Beta_norm × 0.0375) + (Enz_Fosf_norm × 0.0375) +
+           (Enz_Aril_norm × 0.0375) + (Enz_Urea_score × 0.0375)
 ```
+
+### Corrección por compactación (opcional)
+
+Cuando se dispone de lectura de penetrómetro, se aplica un factor corrector multiplicativo post-inferencia:
+
+```
+IBS_real = IBS_base × factor_compactacion(kPa)
+```
+
+> La lectura es válida en **Capacidad de Campo** (24–48hs post lluvia o riego). Suelo seco sobreestima, suelo saturado subestima.
+
+| kPa | Estado | Factor | Impacto |
+|---|---|---|---|
+| 0 – 1.500 | Óptimo | 1.00 | Sin restricción |
+| 1.500 – 2.000 | Restricción leve | 0.70 | Desvío energético radicular |
+| 2.000 – 2.500 | Daño estructural | 0.35 | Pérdida 20–60% rendimiento |
+| > 2.500 | Impedancia severa | 0.10 | Crecimiento radicular detenido |
 
 > **Nota:** Los pesos están desacoplados de la ecuación y se pueden ajustar mediante configuración.
 
@@ -34,12 +51,12 @@ IBS = (CO2_norm × 0.35) + (MO_norm × 0.25) + (pH_score × 0.15) + (Temp_score 
 |---|---|---|---|
 | CO₂ respiración basal | mg CO₂ / kg suelo / día | 35% | Lineal — rango 30–600 |
 | Materia Orgánica | % | 25% | Lineal — rango 0.3–6.0 |
+| pH del suelo | Escala 0–14 | 15% | Gaussiana — pico en 6.5 |
+| Temperatura | °C a 10cm | 10% | Gaussiana — pico en 22°C |
 | Beta-glucosidasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
 | Fosfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
 | Arilsulfatasa | U / g | 3.75% | Lineal — rango 0.0–10.0 |
-| Ureasa | U / g | 3.75% | Gaussiana — pico en 5.0 (penaliza exceso) |
-| pH del suelo | Escala 0–14 | 15% | Gaussiana — pico en 6.5 |
-| Temperatura | °C a 10cm | 10% | Gaussiana — pico en 22°C |
+| Ureasa | U / g | 3.75% | Gaussiana — pico en 5.0 |
 
 ### Normalización
 
@@ -162,19 +179,39 @@ python app.py
 
 ### Verificar que el modelo responde
 
+**Sin compactación**:
+
 ```bash
 curl -X POST http://localhost:5000/predecir \
   -H "Content-Type: application/json" \
-  -d '{"co2_mg_kg_dia": 280, "mo_porcentaje": 2.4, "ph": 6.5, "temp_celsius": 21, "enz_deshidrogenasa": 7.5, "enz_beta_glucosidasa": 6.0, "enz_fosfatasa": 5.5, "enz_arilsulfatasa": 6.8, "enz_ureasa": 4.5}'
+  -d '{"co2_mg_kg_dia": 280, "mo_porcentaje": 2.4, "ph": 6.5, "temp_celsius": 21, "enz_beta_glucosidasa": 6.0, "enz_fosfatasa": 5.5, "enz_arilsulfatasa": 6.8, "enz_ureasa": 4.5}'
 ```
-
-Respuesta esperada:
 
 ```json
 {
-  "ibs_score": 63.4,
+  "ibs_score": 50.82,
   "estado": "medio",
   "fuente": "modelo_ml"
+}
+```
+
+**Con factor de compactación** `kpa`:
+
+```bash
+curl -X POST http://localhost:5000/predecir \
+  -H "Content-Type: application/json" \
+  -d '{"co2_mg_kg_dia": 280, "mo_porcentaje": 2.4, "ph": 6.5, "temp_celsius": 21, "enz_beta_glucosidasa": 6.0, "enz_fosfatasa": 5.5, "enz_arilsulfatasa": 6.8, "enz_ureasa": 4.5, "kpa": 2200}'
+```
+
+```json
+{
+  "ibs_score": 17.79,
+  "ibs_base": 50.82,
+  "estado": "critico",
+  "fuente": "modelo_ml",
+  "kpa": 2200.0,
+  "factor_compactacion": 0.35,
+  "estado_compactacion": "dano_estructural"
 }
 ```
 
