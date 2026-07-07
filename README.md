@@ -1,4 +1,4 @@
-# 🌱 IBS — Índice de Bioactividad del Suelo
+# IBS — Índice de Bioactividad del Suelo
 
 > Sistema abierto de análisis y scoring de salud biológica del suelo.
 > Fórmula ponderada + modelo ML + motor de recomendaciones agronómicas.

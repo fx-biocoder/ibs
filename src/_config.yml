@@ -9,6 +9,8 @@ paginate_path: /blog/page:num/
 
 theme: minima
 
+source: src
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -21,3 +23,8 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+
+collections:
+  events:
+    output: false
+    sort_by: date
